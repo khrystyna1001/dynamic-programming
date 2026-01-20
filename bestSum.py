@@ -1,21 +1,24 @@
-def bestSum(targetSum, numbers=[]):
+def bestSum(targetSum, numbers=[], memo={}):
+    if targetSum in memo:
+        return memo[targetSum]
     if targetSum == 0:
         return []
     if targetSum < 0:
         return None
     
-    shortestCombination = None
+    shortest = None
 
     for num in numbers:
         remainder = targetSum - num
-        remainderCombination = bestSum(remainder, numbers)
-        if remainderCombination != None:
-            remainderCombination.append(num)
-            combination = remainderCombination
-            if (shortestCombination == None or len(combination) < len(shortestCombination)):
-                shortestCombination = combination
+        remainder_combination = bestSum(remainder, numbers, memo)
+        if remainder_combination != None:
+            remainder_combination.append(num)
+            combination = remainder_combination
+            if (shortest == None or len(combination) < len(shortest)):
+                shortest = combination
 
-    return shortestCombination
+    memo[targetSum] = shortest
+    return shortest
 
 if __name__ == "__main__":
     print(bestSum(7, [5,3,4,7]))
