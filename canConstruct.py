@@ -1,4 +1,4 @@
-# memoization
+# Memoization
 def can_construct (target, word_bank=[], memo={}):
     if target in memo:
         return memo[target]
@@ -13,6 +13,7 @@ def can_construct (target, word_bank=[], memo={}):
     memo[target] = False
     return False
 
+# Tabulation
 def can_construct_tabulation(target, word_bank=[]):
     table = [False] * (len(target) + 1)
     table[0] = True
